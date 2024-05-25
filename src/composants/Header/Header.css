@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px;
+    border-bottom: 1px solid;
+}
+.imgheader {
+    width: 12%;
+    height: 12%;
+}
+.headermenu {
+    display: flex;
+    list-style: none;
+    font-size: 30px;
+}
+.menueli{
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+}
+
+
+@media only screen and (min-width: 200px) and (max-width: 450px) {
+    .header {
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgheader {
+        width: 36%;
+
+    }
+    .headermenu {
+       width: 100%;
+        font-size: 30px;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 450px) {
+    
+}

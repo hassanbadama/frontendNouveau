@@ -1,0 +1,47 @@
+.likedd{
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+    color: grey;
+}
+.likes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.texte{
+  font-size: 18px;
+  font-weight: bold;
+}
+.text {
+    height: 206px;
+    font-size: 20px;
+    font-weight: bold;
+    background: darkgoldenrod;
+    overflow: scroll;
+}
+.like{
+    color: blue;
+    font-size: 22px;
+}
+.dislike{
+    color: blue;
+    transform: rotate(180deg);
+    font-size: 22px;
+   
+}
+
+.nbreLike{
+    color: blue;
+    font-size: 25px;
+}
+.liked{
+    margin-right: 30px;
+   
+}
+.pointer{
+    cursor: pointer;
+}
+.desactive {
+    color: #c6c6d6;
+}

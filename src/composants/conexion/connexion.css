@@ -1,0 +1,51 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+}
+input {
+    height: 34px;
+    margin-bottom: 10px;
+}
+label{
+    font-size: 18px;
+}
+#submit{
+    width: 120px;
+}
+.connexion {
+    border-radius: 10px;
+    border: 1px solid;
+    width: 90%;
+    margin: auto;
+    height: 100%;
+   
+}
+.information{
+    margin-left: 10px;
+}
+.form{
+    font-weight: bold;
+    width: 80%;
+}
+@media only screen and (min-width: 451px) and (max-width: 2000px) {
+   
+input{
+    height: 60px;
+}
+label{
+    font-size: 35px;
+    margin-top: 10px;
+}
+.information{
+    margin-left: 10px;
+    font-size: 25px;
+}
+#submit {
+    font-size: 30px;
+    width: 220px;
+    height: 70px;
+}
+    
+}
