@@ -33,7 +33,7 @@ export const Conexion = ({valide})=>{
       Formdata.append("email",email)
       Formdata.append("image",fichier.files[0])
 
-     fetch("https://backend-mongodb-0jt7.onrender.com/api/auth/users", {
+     fetch("http://localhost:3000/api/auth/users", {
         method: 'POST',
         headers: {  "Authorization":"Bearer"},
         body: Formdata

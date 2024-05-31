@@ -1,28 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
 import '../likes/like.css'
-import { useNavigate } from "react-router-dom";
-import { Page_publication } from "../../pages/Page_publication";
+import { Message } from "../message/message";
+import { useState } from "react";
 
-
-export const Likes = ({ id_pub, like, dislike, tabLike, tabDisLike }) => {
-   const t ="disabled"
+export const Likes = ({ id_pub, like, dislike, tabLike, tabDisLike, sms_like, nbr_message}) => {
+  const [nom, setNom] = useState(""); 
   const idp = localStorage.getItem("mot")
-  const { id } = useParams()
-  const Nagate = useNavigate()
-  const [el, setEL] = useState(0);
+
+console.log("messages =====");
+
+console.log(sms_like);
+sms_like && sms_like.map(el =>{
+  console.log(el.message);
+
+})
+fetch(`http://localhost:3000/api/auth/rechercherUser/${idp}`)
+.then((res) => res.json())
+.then((data) => {
+     console.log("trouver user");
+     console.log(data.nom);
+     setNom(data.nom)
+
+  });
+
+
  
-
-
   const LAKIER = (liked, idp) => {
     
     const k = {
       mot: idp,
       like: liked
     }
-    fetch(`https://backend-mongodb-0jt7.onrender.com/auth/likes/${id_pub}`, {
+    fetch(`http://localhost:3000/api/auth/likes/${id_pub}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(k)
@@ -38,10 +47,8 @@ export const Likes = ({ id_pub, like, dislike, tabLike, tabDisLike }) => {
  
 
   const liker = (e) => {
-
     document.querySelector(".liked").disabled=true
      console.log("likk");
-     
      console.log(e.target);
     let liked = 1
     if (tabLike.includes(idp)) {
@@ -52,7 +59,6 @@ export const Likes = ({ id_pub, like, dislike, tabLike, tabDisLike }) => {
       // e.target.disabled=true
       window.location.reload();
       //Nagate("/afficher")
-     
     }
     else {
       console.log("n'existe");
@@ -64,8 +70,7 @@ export const Likes = ({ id_pub, like, dislike, tabLike, tabDisLike }) => {
    
     }
   }
-console.log("etat de el");
-console.log(el);
+
   const disliker = () => {
     console.log("n'est likerr");
     let liked = -1
@@ -85,18 +90,86 @@ console.log(el);
     }
 
   }
+  const message =(e)=>{
+    console.log("message");
+    console.log(e);
+    console.log(e.target);
+    console.log("teste =");
+    //console.log(monElement.children[i].tagName);node.parentNode;
+    let t1 = e.target
+    let t2 = e.target.parentElement.children[4]
+    console.log(t1);
+    console.log(t2);
+   t2.style.display = "block";
+   // console.log(document.querySelector('.ferme'));
+   
+   // document.querySelector('.ferme').style.display = "block";
+  }
+  //const description = document.querySelector(".description").value;
+
+
+  
   return (
     <div className="likes">{
       tabDisLike.includes(idp)? <div className="likedflex">
         <button  disabled className="liked" to={`/affiches/${id_pub}`}  onClick={liker} ><i className="like desactive fa-sharp fa-solid fa-thumbs-up"></i> <span className="nbreLike">{like}</span> </button>
         <button  className="disliked pointer" to={`/affiches/${id_pub}`} onClick={disliker} > <i className="dislike fa-sharp fa-solid fa-thumbs-up"></i> <span className="nbreLike">{dislike}</span> </button>
+
+          <i onClick={message} className=" like-message fa-solid fa-message"></i> 
+          <span  className="nbreLike">{nbr_message}</span> 
+         
+            <div  className="ferme">
+            {
+                sms_like && sms_like.map(m=>{
+                  return <div className="commentaire"> <p className="nom_commentaire"> {m.nom} </p> <p className="commentaire1">  {m.message}  </p></div>
+                })
+              }
+              < Message
+                 id={id_pub}
+                 nom={nom}
+              />
+            
+            </div>
+       
      </div> :
        tabLike.includes(idp)? <div>
        <button  className="liked pointer" to={`/affiches/${id_pub}`}  onClick={liker} >   <i className=" like fa-sharp fa-solid fa-thumbs-up"></i> <span className="nbreLike">{like}</span> </button>
+        
         <button disabled className="disliked desactive" to={`/affiches/${id_pub}`} onClick={disliker} > <i className="dislike desactive fa-sharp fa-solid fa-thumbs-up"></i> <span className="nbreLike">{dislike}</span> </button>
+        <i onClick={message} className=" like-message fa-solid fa-message"></i> 
+          <span  className="nbreLike">{nbr_message}</span> 
+         
+            <div  className="ferme">
+           
+              {
+                sms_like && sms_like.map(m=>{
+                  return <div className="commentaire"> <p className="nom_commentaire"> {m.nom} </p> <p className="commentaire1">  {m.message}  </p></div>
+                })
+              }
+             
+            < Message
+                id={id_pub}
+                nom={nom}
+              />
+            </div>
      </div>:<div>
        <button  className="liked pointer" to={`/affiches/${id_pub}`}  onClick={liker} >   <i className="like fa-sharp fa-solid fa-thumbs-up"></i> <span className="nbreLike">{like}</span> </button>
         <button className="disliked pointer" to={`/affiches/${id_pub}`} onClick={disliker} > <i className="dislike fa-sharp fa-solid fa-thumbs-up"></i> <span className="nbreLike">{dislike}</span> </button>
+        <i onClick={message} className=" like-message fa-solid fa-message"></i> 
+          <span  className="nbreLike">{nbr_message}</span> 
+          
+            <div  className="ferme">
+          
+            {
+                sms_like && sms_like.map(m=>{
+                  return <div className="commentaire"> <p className="nom_commentaire"> {m.nom} </p> <p className="commentaire1">  {m.message}  </p></div>
+                })
+              }
+            < Message
+               id={id_pub}
+               nom={nom}
+              />
+            </div>
      </div>
       }
     

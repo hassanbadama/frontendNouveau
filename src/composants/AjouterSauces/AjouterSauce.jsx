@@ -48,7 +48,7 @@ export const AjouterSauce = ()=>{
     
     console.log(fichier.files[0]);
       console.log(Formdata);
-     fetch("https://backend-mongodb-0jt7.onrender.com/auth/sauces", {
+     fetch("http://localhost:3000/api/auth/sauces", {
         method: 'POST',
         headers: {
           "Authorization":`Bearer ${token}`

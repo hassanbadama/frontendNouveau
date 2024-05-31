@@ -51,7 +51,7 @@ export const Profile = ( {nom, prenom,image})=>{
     
     console.log(fichier.files[0]);
       console.log(Formdata);
-     fetch("https://backend-mongodb-0jt7.onrender.com/auth/sauces", {
+     fetch("http://localhost:3000/api/auth/sauces", {
         method: 'POST',
         headers: {
           "Authorization":`Bearer ${token}`
@@ -59,7 +59,7 @@ export const Profile = ( {nom, prenom,image})=>{
         body:Formdata
       }).then((res) => res.json()) 
        .then((data) =>{
-        // window.location.reload();
+        window.location.reload();
         console.log(data)
        })
    

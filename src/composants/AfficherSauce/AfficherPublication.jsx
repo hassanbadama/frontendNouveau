@@ -8,7 +8,7 @@ import { AjouterSauce } from "../AjouterSauces/AjouterSauce";
 
 
 
-export const AfficherPublication = ({nom,prenom,imgp, id_pub, userId, description, image, nbrelike, nbredislke, tablike, tabDislike }) => {
+export const AfficherPublication = ({nom,prenom,imgp, id_pub, userId, description, image, nbrelike, nbredislke, tablike, tabDislike, sms,nbre_sms, nom1 }) => {
     const token = localStorage.getItem("token")
     const id = localStorage.getItem("mot")
     const role = localStorage.getItem("role")
@@ -17,7 +17,7 @@ export const AfficherPublication = ({nom,prenom,imgp, id_pub, userId, descriptio
     const Supprimer = () => {
         console.log("supprimer");
         console.log(id_pub);
-        fetch(`https://backend-mongodb-0jt7.onrender.com/auth/supprimer/${id_pub}`, {
+        fetch(`http://localhost:3000/api/auth/supprimer/${id_pub}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const AfficherPublication = ({nom,prenom,imgp, id_pub, userId, descriptio
     const [user, setUser] = useState([]);
 
     useEffect(() => {
-        fetch("https://backend-mongodb-0jt7.onrender.com/auth/AfficherUser")
+        fetch("http://localhost:3000/api/auth/AfficherUser")
             .then((res) => res.json())
             .then((data) => {
                 console.log("user");
@@ -58,14 +58,14 @@ export const AfficherPublication = ({nom,prenom,imgp, id_pub, userId, descriptio
                     <div className="icone">
                         {
                             userId === id ? <div>
-                                <Link to={`/modifier/${id_pub}`}><i class="icon_modifier fa-solid fa-pen-to-square"></i></Link>
+                                <Link to={`/modifier/${id_pub}`}><i className=" icon_modifier fa-solid fa-pen-to-square"></i></Link>
                                 {/* <i onClick={Supprimer} class=" icon_supprimer fa-solid fa-trash-can"></i> */}
                             </div> : ""
                         }
                          {
                             userId === id || role === 'true' ? <div>
                                 {/* <Link to={`/modifier/${id_pub}`}><i class=" icon_modifier fa-solid fa-pen-to-square"></i></Link> */}
-                                <i onClick={Supprimer} class="icon_supprimer fa-solid fa-trash-can"></i>
+                                <i onClick={Supprimer} className=" icon_supprimer fa-solid fa-trash-can"></i>
                             </div> : ""
                         }
                     </div>
@@ -76,6 +76,8 @@ export const AfficherPublication = ({nom,prenom,imgp, id_pub, userId, descriptio
                         dislike={nbredislke}
                         tabLike={tablike}
                         tabDisLike={tabDislike}
+                        sms_like={sms}
+                        nbr_message={nbre_sms}
                     />
                 </span>
             </div>

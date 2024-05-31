@@ -21,7 +21,7 @@ export const Conexion = ({valide})=>{
         email:email
        
       }
-     fetch("https://backend-mongodb-0jt7.onrender.com/auth/connexion", {
+     fetch("http://localhost:3000/api/auth/connexion", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(data)

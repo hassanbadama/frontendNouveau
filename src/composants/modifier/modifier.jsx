@@ -2,13 +2,15 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Modifier = () => {
+  const Na = useNavigate()
   const { id } = useParams()
   const [description, setDescription] = useState([]); 
   console.log("id recuperer");
   useEffect(() => {
-    fetch(`https://backend-mongodb-0jt7.onrender.com/auth/rechercher/${id}`)
+    fetch(`http://localhost:3000/api/auth/rechercher/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("oui c'est lui mm elemets");
@@ -32,7 +34,7 @@ export const Modifier = () => {
     Formdata.append("image", fichier.files[0])
     console.log(fichier.files[0]);
     console.log(Formdata);
-    fetch(`https://backend-mongodb-0jt7.onrender.com/auth/modifier/${id}`, {
+    fetch(`http://localhost:3000/api/auth/modifier/${id}`, {
       method: 'put',
       headers: {
         "Authorization": `Bearer ${token}`
@@ -40,8 +42,8 @@ export const Modifier = () => {
       body: Formdata
     }).then((res) => res.json())
       .then((data) => {
-        window.location.reload();
-        console.log(data)
+       
+        Na("/afficher")
       })
   }
   console.log(id);
